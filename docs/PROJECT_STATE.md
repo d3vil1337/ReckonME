@@ -39,7 +39,11 @@ C:\Users\WhiteDevil\.codex\visualizations\2026\10\15\01a13f74-9fe3-7b93-ac6a-ebc
 This is outside the project on a different drive path, but hardware independence
 and off-device durability are not established. See BACKUPS.md for owner-managed
 storage and private GitHub setup. The script verifies the Git bundle and ZIP
-entry list and writes hashes; restoration should also be tested.
+entry list and writes hashes. Initial checkpoint `4a23a3d` was archived with a
+complete, verified Git bundle and matching ZIP entry list. Extracting source.zip
+into a separate restore-check directory and running its tests passed all 3 tests.
+Later documentation checkpoints use the same archive procedure; consult the
+latest archive MANIFEST for its exact commit.
 
 ## Known limitations and exact next task
 
