@@ -1,0 +1,16 @@
+version = 1
+
+[[scope.include]]
+target = "example.com"
+include_subdomains = true
+
+[[scope.include]]
+target = "https://api.example.test:8443"
+
+[[scope.include]]
+target = "192.0.2.1"
+ports = [443]
+
+[[scope.exclude]]
+target = "private.example.com"
+include_subdomains = true

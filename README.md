@@ -1,8 +1,9 @@
 # ReckonME
 
 Evidence-driven attack-surface intelligence for security researchers and bug
-bounty hunters. **Foundation only:** the CLI currently provides help and version;
-discovery, network access, analysis and persistence are not implemented.
+bounty hunters. The CLI provides help/version, strict TOML configuration validation
+and offline target/scope checks. Discovery, network access, analysis and persistence
+are not implemented.
 
 ## Setup
 
@@ -37,3 +38,17 @@ See [project state](docs/PROJECT_STATE.md), [specification](docs/PROJECT_SPEC.md
 [demo](docs/DEMO_SCRIPT.md) and [backup instructions](docs/BACKUPS.md).
 Local commits are checkpoints, not remote backups. Scan data belongs in ignored
 directories and needs a separate, private retention policy when implemented.
+
+## Configuration and scope checks (offline)
+
+```powershell
+.\.venv\Scripts\python.exe -m reckonme validate-config --config examples/scope.toml
+.\.venv\Scripts\python.exe -m reckonme check-scope --config examples/scope.toml https://www.example.com
+.\.venv\Scripts\python.exe -m reckonme check-scope --config examples/scope.toml https://private.example.com
+.\.venv\Scripts\python.exe -m reckonme check-scope --config examples/scope.toml https://example.com.attacker.test
+```
+
+The first two succeed; the latter two return exit code 1 (denied). Invalid targets
+or configuration return 2. No command above makes a network request.
+See [scope contract](docs/SCOPE.md) for configuration schema, matching semantics,
+normalization and the API future network modules must use.

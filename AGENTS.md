@@ -20,4 +20,7 @@ No destructive Git commands or deletion of user data without explicit approval.
 Before risky changes create and verify a checkpoint. Keep dependencies minimal.
 Use `python -m unittest discover -s tests -v`; document unavailable checks.
 
-Current authorization is foundation only. No recon engine, AI or web UI.
+Current milestone is configuration and offline scope enforcement. No recon engine,
+AI or web UI. The owner approved committing, pushing and archiving this milestone.
+Do not start the next implementation milestone without approval. Do not claim an
+archive contains uncommitted work: the backup script archives committed data only.

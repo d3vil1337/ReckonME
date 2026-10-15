@@ -1,13 +1,15 @@
 # Verified project state
 
-Date: 2026-10-15 (Asia/Calcutta). Milestone: foundation only.
+Date: 2026-10-15 (Asia/Calcutta). Milestone: configuration and offline scope enforcement, approved; checkpoint/push/archive verification in progress.
 
 ## Implemented
 
-Minimal Python src-layout package, help/version CLI, three offline subprocess
-smoke tests, permanent project documentation, ignore rules and dated external
-source ZIP/Git bundle backup script. No network operations, recon adapters,
-SQLite database, scoring, AI or UI exist yet.
+Python src-layout package, help/version CLI, strict TOML configuration loading,
+offline domain/IP/HTTP(S) target validation, immutable scope rules, deny-by-default
+authorization with exclusions, and validate-config/check-scope CLI commands.
+See SCOPE.md for complete semantics. Added adversarial policy/configuration tests
+and CLI integration tests. No network operations, recon adapters, SQLite database,
+scoring, AI, JavaScript intelligence or UI exist yet.
 
 ## Environment and validation
 
@@ -25,8 +27,29 @@ SQLite database, scoring, AI or UI exist yet.
 - `.venv\Scripts\reckonme.exe --version`: `reckonme 0.1.0`.
 - Ignore checks confirmed exclusion of .env, virtual environments, scan data,
   reports and private-key filename patterns. `git diff --check` passed.
-- GitHub CLI, Subfinder, httpx and Katana were not found on PATH. No remote is
-  configured; GitHub authentication and remote backup are unverified.
+- GitHub CLI, Subfinder, httpx and Katana were not found on PATH during foundation
+  inspection. Remote origin is now configured as https://github.com/d3vil1337/ReckonME.git
+  (owner-designated private repository). Push verification is recorded below once complete.
+
+## Current milestone verification
+
+- Full command: `.\.venv\Scripts\python.exe -m unittest discover -s tests -v`.
+- Result: 33 tests passed in 1.978 seconds on Python 3.12.14, including the original
+  3 foundation tests. Subtests cover additional invalid inputs and boundaries.
+- Full suite ran outside the sandbox because temporary-file configuration tests
+  encountered sandbox permission errors; no tests were skipped.
+- Earlier run found an IPv4-mapped IPv6 representation expectation difference;
+  the test now verifies equivalent addresses normalize identically across runtime
+  representations. Authority review added rejection of bracketed IPv6 trailing text.
+- No live targets contacted. No dependencies added; Python 3.11+ standard library.
+- Six manual CLI checks from DEMO_SCRIPT.md returned the expected exit codes:
+  0, 0, 1, 1, 0, 2. These cover valid configuration, allowed domain, exclusion,
+  deceptive suffix, explicit origin/port, and malformed URL port.
+- Diff review found no unrelated deletions. `git diff --check` passed; all 16
+  modified/new text files passed trailing-whitespace and credential-pattern checks.
+  Owner approval now authorizes commit, push and external archive. Foundation
+  commits and archives are preserved. Exact verified hashes and archive paths will
+  be recorded after those operations succeed.
 
 ## Checkpoints and archive procedure
 
@@ -51,6 +74,14 @@ Foundation smoke tests do not establish scanner correctness. Normal installation
 with a separately installed Python and isolated build dependencies has not been
 tested on this machine. No license has been selected by the owner.
 
-Stop for owner review. After approval, implement milestone 1: configuration schema,
-CLI validation, explicit scope semantics and offline scope-policy tests before
-adding any network-capable integrations. Keep provider AI and UI out of that scope.
+Complete the approved milestone checkpoint, remote hash comparison and external
+archive verification, then stop. Next implementation milestone (not authorized
+yet): design scope-constrained tool adapters, dependency checks and fake-tool
+integration tests before live recon.
+
+Current limitations: DNS resolution/connection policy and redirect interception
+are not implemented; require_allowed must be called by every future adapter.
+CIDRs, single-label hosts and URL path-based rules are intentionally unsupported.
+Python built-in IDNA is used with lossy mappings rejected. Logging/redaction
+infrastructure from the wider specification is deferred until an execution layer
+exists; current error messages avoid echoing raw targets/configuration content.

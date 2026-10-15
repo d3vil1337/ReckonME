@@ -1,6 +1,15 @@
 # Architecture plan
 
-Only the package entry point exists today. The following is a design plan.
+Implemented: CLI entry point, targets.py (offline normalization/validation),
+config.py (strict TOML loading), and scope.py (immutable authorization policy).
+See SCOPE.md for their exact public contract. Remaining components are planned.
+
+Current flow: CLI -> load_config -> immutable ScopePolicy -> require_allowed ->
+normalized Target or typed error. No network or persistence occurs. Configuration
+and validation errors return CLI exit code 2; denied scope returns 1; success 0.
+Every future network boundary must call require_allowed for its actual destination.
+Domain scope does not resolve DNS or enforce connection-time IP policy; adapters
+must supply that enforcement and independently check every redirect.
 
 CLI -> validated configuration -> scope policy -> orchestration -> tool adapters
 -> normalized observations -> SQLite -> deterministic analysis -> reports.
