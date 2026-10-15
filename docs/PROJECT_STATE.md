@@ -1,6 +1,6 @@
 # Verified project state
 
-Date: 2026-10-15 (Asia/Calcutta). Milestone: configuration and offline scope enforcement, approved; checkpoint/push/archive verification in progress.
+Date: 2026-10-15 (Asia/Calcutta). Milestone: configuration and offline scope enforcement, approved, committed, pushed and archived.
 
 ## Implemented
 
@@ -29,7 +29,7 @@ scoring, AI, JavaScript intelligence or UI exist yet.
   reports and private-key filename patterns. `git diff --check` passed.
 - GitHub CLI, Subfinder, httpx and Katana were not found on PATH during foundation
   inspection. Remote origin is now configured as https://github.com/d3vil1337/ReckonME.git
-  (owner-designated private repository). Push verification is recorded below once complete.
+  (owner-designated private repository). Successful push/hash verification is recorded below.
 
 ## Current milestone verification
 
@@ -47,9 +47,23 @@ scoring, AI, JavaScript intelligence or UI exist yet.
   deceptive suffix, explicit origin/port, and malformed URL port.
 - Diff review found no unrelated deletions. `git diff --check` passed; all 16
   modified/new text files passed trailing-whitespace and credential-pattern checks.
-  Owner approval now authorizes commit, push and external archive. Foundation
-  commits and archives are preserved. Exact verified hashes and archive paths will
-  be recorded after those operations succeed.
+  Foundation commits and archives are preserved.
+- Verified implementation commit: `e08c97dc88310420d2a4d674f8bec108e30e84ad`.
+  Message: Add strict configuration loading and reusable offline scope enforcement.
+- `git push -u origin main` succeeded. `git rev-parse HEAD` and
+  `git ls-remote origin refs/heads/main` both returned the implementation hash above.
+- The documented backup script created and verified this milestone archive:
+  C:\Users\WhiteDevil\.codex\visualizations\2026\10\15\01a13f74-9fe3-7b93-ac6a-ebc454b68b16\ReckonME_Backups\20261015-181614-134-e08c97dc8831
+- Independently recomputed SHA-256 values match SHA256.txt:
+  - source.zip: `6598DF3443DC77426CBA4391A598E9A354A907F352AD9452FF1F185E0C5A45C7`
+  - history.bundle: `4DDA4D7702C006B250D607964EC785534836CB7B6CFCF927EE0F63DE201D0E43`
+- `git bundle verify` passed with complete history; the archive MANIFEST records
+  the implementation commit. ZIP entry verification also passed in the script.
+  The bundle includes all refs, including local Codex checkpoint refs; source.zip
+  contains HEAD files. Local Git settings, ignored data and reflogs are not backed up.
+- This verification record is saved in a separate documentation-only follow-up
+  commit. Its final commit/push/archive identity is recorded by Git and the later
+  archive MANIFEST, avoiding a self-referential hash or future-success assertion.
 
 ## Checkpoints and archive procedure
 
@@ -74,10 +88,10 @@ Foundation smoke tests do not establish scanner correctness. Normal installation
 with a separately installed Python and isolated build dependencies has not been
 tested on this machine. No license has been selected by the owner.
 
-Complete the approved milestone checkpoint, remote hash comparison and external
-archive verification, then stop. Next implementation milestone (not authorized
-yet): design scope-constrained tool adapters, dependency checks and fake-tool
-integration tests before live recon.
+Stop after preserving this verification record and its final remote/archive
+checkpoint. Next implementation milestone requires new approval: design
+scope-constrained tool adapters, dependency checks and fake-tool integration tests
+before live recon. Do not implement the recon engine yet.
 
 Current limitations: DNS resolution/connection policy and redirect interception
 are not implemented; require_allowed must be called by every future adapter.
